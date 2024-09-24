@@ -7,4 +7,11 @@ export const routes: Routes = [
     component: ListComponent,
     title: 'Lista de produtos',
   },
+  {
+    path: 'create-product',
+    loadComponent: () =>
+      import('./components/create-product/create-product.component').then(
+        (m) => m.CreateProductComponent
+      ),
+  },
 ];
