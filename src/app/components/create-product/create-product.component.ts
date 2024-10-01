@@ -12,6 +12,7 @@ import { ProductsService } from '../../services';
 import { CreateProduct } from '../../services/interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Utils } from '../../utils';
 
 @Component({
   selector: 'app-create-product',
@@ -30,6 +31,7 @@ export class CreateProductComponent {
   productServices = inject(ProductsService);
   matSnackBar = inject(MatSnackBar);
   router = inject(Router);
+  utils = inject(Utils);
 
   form = new FormGroup({
     title: new FormControl<string>('', {
@@ -41,12 +43,10 @@ export class CreateProductComponent {
   onSubmit() {
     const payload: CreateProduct = { title: this.form.value?.title! };
     this.productServices.create(payload).subscribe(() => {
-      this.matSnackBar.open('Produto criado com sucesso!', 'Ok', {
-        duration: 3000,
-        verticalPosition: 'top',
-        horizontalPosition: 'right',
+      this.utils.Toast({
+        text: 'Produto criado com sucesso!',
+        actionText: 'Ok',
       });
-
       this.router.navigateByUrl('/');
     });
   }
