@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, Input, input, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Products } from '../../../../services/interfaces';
@@ -11,5 +11,5 @@ import { Products } from '../../../../services/interfaces';
   styleUrl: './card.component.scss',
 })
 export class CardComponent {
-  product = input.required<Products>();
+  @Input() product!: Products;
 }
