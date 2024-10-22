@@ -7,15 +7,14 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInput, MatInputModule } from '@angular/material/input';
-import { ProductsService } from '../../services';
+import { MatInputModule, MatInput } from '@angular/material/input';
 import { CreateProduct } from '../../services/interfaces';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ProductsService } from '../../services';
 import { Utils } from '../../utils';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-product',
+  selector: 'app-edit',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -24,13 +23,13 @@ import { Utils } from '../../utils';
     MatInput,
     MatButtonModule,
   ],
-  templateUrl: './create-product.component.html',
-  styleUrl: './create-product.component.scss',
+  templateUrl: './edit.component.html',
+  styleUrl: './edit.component.scss',
 })
-export class CreateProductComponent {
+export class EditComponent {
   productServices = inject(ProductsService);
-  router = inject(Router);
   utils = inject(Utils);
+  router = inject(Router);
 
   form = new FormGroup({
     title: new FormControl<string>('', {
@@ -40,8 +39,10 @@ export class CreateProductComponent {
   });
 
   onSubmit() {
+    const id = '';
+
     const payload: CreateProduct = { title: this.form.value?.title! };
-    this.productServices.create(payload).subscribe(() => {
+    this.productServices.update(id, payload).subscribe(() => {
       this.utils.Toast({
         text: 'Produto criado com sucesso!',
         actionText: 'Ok',
