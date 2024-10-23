@@ -4,6 +4,8 @@ import {
   Routes,
 } from '@angular/router';
 import { ListComponent } from './components';
+import { inject } from '@angular/core';
+import { ProductsService } from './services';
 
 export const routes: Routes = [
   {
@@ -21,11 +23,9 @@ export const routes: Routes = [
   {
     path: 'edit-product/:id',
     resolve: {
-      product: (
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-      ) => {
-
+      product: (route: ActivatedRouteSnapshot) => {
+        const productsService = inject(ProductsService);
+        return productsService.getById(route.params['id']);
       },
     },
     loadComponent: () =>

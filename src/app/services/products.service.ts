@@ -12,6 +12,10 @@ export class ProductsService {
     return this.httpClient.get<Products[]>('/api/products');
   }
 
+  getById(id: string) {
+    return this.httpClient.get<Products>(`/api/products/${id}`);
+  }
+
   create(payload: CreateProduct) {
     return this.httpClient.post<Products>('/api/products', payload);
   }

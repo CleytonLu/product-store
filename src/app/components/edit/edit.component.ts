@@ -1,28 +1,14 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule, MatInput } from '@angular/material/input';
-import { CreateProduct } from '../../services/interfaces';
+import { CreateProduct, Products } from '../../services/interfaces';
 import { ProductsService } from '../../services';
 import { Utils } from '../../utils';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatInput,
-    MatButtonModule,
-  ],
+  imports: [FormComponent],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })
@@ -30,21 +16,13 @@ export class EditComponent {
   productServices = inject(ProductsService);
   utils = inject(Utils);
   router = inject(Router);
+  product: Products = inject(ActivatedRoute).snapshot.data['product'];
 
-  form = new FormGroup({
-    title: new FormControl<string>('', {
-      nonNullable: true,
-      validators: Validators.required,
-    }),
-  });
-
-  onSubmit() {
-    const id = '';
-
-    const payload: CreateProduct = { title: this.form.value?.title! };
-    this.productServices.update(id, payload).subscribe(() => {
+  onSubmit(product: Products) {
+    const payload: CreateProduct = { title: product.title };
+    this.productServices.update(this.product.id, payload).subscribe(() => {
       this.utils.Toast({
-        text: 'Produto criado com sucesso!',
+        text: 'Produto editado com sucesso!',
         actionText: 'Ok',
       });
       this.router.navigateByUrl('/');
