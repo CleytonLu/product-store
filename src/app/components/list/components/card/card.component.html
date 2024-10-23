@@ -6,6 +6,6 @@
     <button mat-button [routerLink]="['/edit-product/', product.id]">
       Editar
     </button>
-    <button mat-button>Deletar</button>
+    <button mat-button (click)="deleteProduct()">Deletar</button>
   </mat-card-actions>
 </mat-card>
