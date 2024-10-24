@@ -11,14 +11,15 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import { ProductsService } from '../../services';
 import { CreateProduct, Products } from '../../services/interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Utils } from '../../utils';
 import { FormComponent } from '../form/form.component';
+import { BackToListComponent } from '../back-to-list/back-to-list.component';
 
 @Component({
   selector: 'app-create-product',
   standalone: true,
-  imports: [FormComponent],
+  imports: [FormComponent, BackToListComponent],
   templateUrl: './create-product.component.html',
   styleUrl: './create-product.component.scss',
 })
