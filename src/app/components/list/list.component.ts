@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ProductsService } from '../../services';
 import { Products } from '../../services/interfaces';
 import { CardComponent } from './components/card/card.component';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -13,13 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './list.component.scss',
 })
 export class ListComponent {
-  products: Products[] = [];
+  products = signal<Products[]>(inject(ActivatedRoute).snapshot.data['products']);
 
   productsService = inject(ProductsService);
-
-  ngOnInit() {
-    this.productsService.getAll().subscribe((products) => {
-      this.products = products;
-    });
-  }
 }
