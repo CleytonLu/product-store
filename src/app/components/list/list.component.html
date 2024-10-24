@@ -4,6 +4,14 @@
   >
 </div>
 
-@for (product of products(); track product.id) {
+@for (product of products(); track product.id) { @defer (on immediate) {
 <app-card [product]="product" />
+  } 
+} 
+
+@empty 
+{ 
+  @defer ( on immediate ) {
+    <app-no-itens />
+  } 
 }

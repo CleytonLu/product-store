@@ -1,32 +1,3 @@
 {
-  "products": [
-    {
-      "title": "Teste de update",
-      "id": "1"
-    },
-    {
-      "id": "f68b",
-      "title": "Sapato"
-    },
-    {
-      "id": "5fab",
-      "title": "Camisa Polo"
-    },
-    {
-      "id": "d3d0",
-      "title": "Camisa"
-    },
-    {
-      "id": "f1dc",
-      "title": "Tênis de corrida"
-    },
-    {
-      "id": "550d",
-      "title": "Capinhas de celular"
-    },
-    {
-      "id": "483b",
-      "title": "Novo produto"
-    }
-  ]
+  "products": []
 }
