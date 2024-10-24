@@ -1,20 +1,12 @@
-import {
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Routes,
-} from '@angular/router';
+import { Routes } from '@angular/router';
 import { ListComponent } from './components';
-import { inject } from '@angular/core';
-import { ProductsService } from './services';
+import { getProduct, getProducts } from './utils';
 
 export const routes: Routes = [
   {
     path: '',
     resolve: {
-      products: () => {
-        const productsService = inject(ProductsService);
-        return productsService.getAll();
-      },
+      products: getProducts,
     },
     component: ListComponent,
     title: 'Lista de produtos',
@@ -29,10 +21,7 @@ export const routes: Routes = [
   {
     path: 'edit-product/:id',
     resolve: {
-      product: (route: ActivatedRouteSnapshot) => {
-        const productsService = inject(ProductsService);
-        return productsService.getById(route.params['id']);
-      },
+      product: getProduct,
     },
     loadComponent: () =>
       import('./components/edit/edit.component').then((m) => m.EditComponent),

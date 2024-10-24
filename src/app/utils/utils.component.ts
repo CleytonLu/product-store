@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBarConfig, MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { IMatSnackBar } from '../interface';
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class Utils {
-  private _matSnackBar;
+  readonly _matSnackBar;
+
   constructor(matSnackBar: MatSnackBar) {
     this._matSnackBar = matSnackBar;
   }
+
   Toast({
     text,
     actionText,
