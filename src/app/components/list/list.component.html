@@ -4,17 +4,21 @@
   >
 </div>
 
-@for (product of products(); track product.id) { @defer (on immediate) {
-  <app-card 
-    class="item-container" 
-    [product]="product" 
-  />
-  } 
-} 
+@for (product of products(); track product.id) {
+  @defer (on immediate) {
+    <app-card
+      class="item-container"
+      [product]="product"
+    />
+  }
+  @loading {
+    <p>Carregando...</p>
+  }
+}
 
-@empty 
-{ 
+@empty
+{
   @defer ( on immediate ) {
     <app-no-itens />
-  } 
+  }
 }

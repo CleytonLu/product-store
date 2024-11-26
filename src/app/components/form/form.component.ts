@@ -1,24 +1,14 @@
+import { Component, input, output } from '@angular/core';
 import {
-  Component,
-  EventEmitter,
-  inject,
-  Input,
-  input,
-  Output,
-} from '@angular/core';
-import {
-  FormGroup,
   FormControl,
-  Validators,
+  FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ProductsService } from '../../services';
-import { Products, CreateProduct } from '../../services/interfaces';
-import { Utils } from '../../utils';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule, MatInput } from '@angular/material/input';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { Products } from '../../services/interfaces';
 
 @Component({
   selector: 'app-form',
@@ -34,15 +24,15 @@ import { MatInputModule, MatInput } from '@angular/material/input';
   styleUrl: './form.component.scss',
 })
 export class FormComponent {
-  @Input() product!: Products | null;
+  product = input<Products>({ id: '', title: '' });
 
   form!: FormGroup;
 
-  @Output() done = new EventEmitter<Products>();
+  done = output<Products>();
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      title: new FormControl<string>(this.product?.title ?? '', {
+      title: new FormControl<string>(this.product()?.title ?? '', {
         nonNullable: true,
         validators: Validators.required,
       }),
